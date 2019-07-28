@@ -40,7 +40,7 @@ public:
      calculateColourMap will set up the lookup table.
      @param newBrightness will add or subtract a normalised value (-1..1)
      @param newContrast multiplies the slope of the curve (-1..1)
-     @param newGamma the gamma value for the curve (0.1..4.0)
+     @param newGamma the gamma value for the curve (0.1..10.0)
      */
     void calculateColourMap (double newBrightness, double newContrast, double newGamma)
     {
@@ -94,6 +94,10 @@ public:
         juce::Image::BitmapData data (image, 0, 0,
                                       image.getWidth(),
                                       image.getHeight());
+
+        // The image you are about to apply this colour curve has
+        // not enough colour channels as you requested
+        jassert (component < data.pixelStride);
 
         for (int y=0; y < data.height; ++y)
         {
