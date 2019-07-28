@@ -38,6 +38,7 @@ public:
     void paint (juce::Graphics& g) override;
     void resized() override;
 
+    void setColourCurves (std::vector<ColourCurve> colourCurves);
     const std::vector<ColourCurve>& getColourCurves() const;
 
 private:

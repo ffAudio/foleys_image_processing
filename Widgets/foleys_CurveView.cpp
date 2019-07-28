@@ -64,6 +64,12 @@ const std::vector<ColourCurve>& CurveView::getColourCurves() const
     return curves;
 }
 
+void CurveView::setColourCurves (std::vector<ColourCurve> colourCurves)
+{
+    curves = colourCurves;
+    sendChangeMessage();
+}
+
 void CurveView::setPixelFormat (juce::Image::PixelFormat format)
 {
     pixelFormat = format;
