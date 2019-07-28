@@ -122,35 +122,30 @@ public:
                                       image.getWidth(),
                                       image.getHeight());
 
-        const auto* redMap = red.getLookupTable();
-        const auto* greenMap = green.getLookupTable();
-        const auto* blueMap = blue.getLookupTable();
+        const juce::uint8* maps [4] = { nullptr, nullptr, nullptr, nullptr };
 
         if (data.pixelStride == 4)
         {
-            for (int y=0; y < data.height; ++y)
-            {
-                auto* p = data.getLinePointer (y);
-                for (int x=0; x < data.width; ++x)
-                {
-                    *p = blueMap [*p]; ++p;
-                    *p = greenMap [*p]; ++p;
-                    *p = redMap [*p]; ++p;
-                    ++p;
-                }
-            }
+            maps [juce::PixelARGB::indexR] = red.getLookupTable();
+            maps [juce::PixelARGB::indexG] = green.getLookupTable();
+            maps [juce::PixelARGB::indexB] = blue.getLookupTable();
         }
         else if (data.pixelStride == 3)
         {
-            for (int y=0; y < data.height; ++y)
+            maps [juce::PixelRGB::indexR] = red.getLookupTable();
+            maps [juce::PixelRGB::indexG] = green.getLookupTable();
+            maps [juce::PixelRGB::indexB] = blue.getLookupTable();
+        }
+
+        for (int y=0; y < data.height; ++y)
+        {
+            auto* p = data.getLinePointer (y);
+            for (int x=0; x < data.width; ++x)
             {
-                auto* p = data.getLinePointer (y);
-                for (int x=0; x < data.width; ++x)
-                {
-                    *p = blueMap [*p]; ++p;
-                    *p = greenMap [*p]; ++p;
-                    *p = redMap [*p]; ++p;
-                }
+                if (maps [0] != nullptr) *p = maps [0][*p]; ++p;
+                if (maps [1] != nullptr) *p = maps [1][*p]; ++p;
+                if (maps [2] != nullptr) *p = maps [2][*p]; ++p;
+                if (maps [3] != nullptr) *p = maps [3][*p]; ++p;
             }
         }
     }

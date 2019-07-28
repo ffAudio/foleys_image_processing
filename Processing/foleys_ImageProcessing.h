@@ -61,8 +61,8 @@ static inline void multiplyChannel (juce::Image& imageToApply, int targetChannel
 static inline void multiplyAlpha (juce::Image& imageToApply, const juce::Image& alphaImage)
 {
     jassert (imageToApply.hasAlphaChannel());
-    const int sourceChannel = alphaImage.isSingleChannel() ? 0 : 3;
-    const int targetChannel = imageToApply.isSingleChannel() ? 0 : 3;
+    const int sourceChannel = alphaImage.isSingleChannel() ? 0 : juce::PixelARGB::indexA;
+    const int targetChannel = imageToApply.isSingleChannel() ? 0 : juce::PixelARGB::indexA;
 
     multiplyChannel (imageToApply, targetChannel, alphaImage, sourceChannel);
 }
@@ -86,10 +86,10 @@ static inline std::vector<std::vector<unsigned int>> getHistogram (const juce::I
     }
 
     if (image.isARGB())
-        return { histogram [2], histogram [1], histogram [0], histogram [3] };
+        return { histogram [juce::PixelARGB::indexR], histogram [juce::PixelARGB::indexG], histogram [juce::PixelARGB::indexB], histogram [juce::PixelARGB::indexA] };
 
     if (image.isRGB())
-        return { histogram [2], histogram [1], histogram [0]};
+        return { histogram [juce::PixelRGB::indexR], histogram [juce::PixelRGB::indexG], histogram [juce::PixelRGB::indexB]};
 
     return histogram;
 }

@@ -34,7 +34,7 @@ CurveView::CurveView()
 
     contrast.setRange (-1.0, 1.0, 0.01);
     brightness.setRange (-1.0, 1.0, 0.01);
-    gamma.setRange (0.1, 4.0, 0.01);
+    gamma.setRange (0.1, 10.0, 0.01);
     gamma.setSkewFactorFromMidPoint (1.0);
 
     contrast.onValueChange = [&] { updateCurve (false); };
