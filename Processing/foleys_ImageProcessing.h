@@ -47,7 +47,7 @@ static inline void multiplyChannel (juce::Image& imageToApply, int targetChannel
 
         for (int x = 0; x < target.width; ++x)
         {
-            juce::uint16 value = *ptr * *mult;
+            const auto value = juce::uint16 (*ptr) * juce::uint16 (*mult);
             *ptr  = juce::uint8 (value >> 8);
             ptr  += target.pixelStride;
             mult += alpha.pixelStride;

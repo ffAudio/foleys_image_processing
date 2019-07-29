@@ -42,16 +42,10 @@ void HistogramView::setChannelColours (const juce::Array<juce::Colour>& colours)
     channelColours = colours;
 }
 
-void HistogramView::setHistogram (std::vector<std::vector<unsigned int>> histogramToUse)
+void HistogramView::setHistogram (std::vector<std::vector<unsigned int>> histogramToUse, unsigned int max)
 {
     histogram = std::move (histogramToUse);
-
-    unsigned int max = 0;
-    for (int c=0; c < histogram.size(); ++c)
-        for (int i=0; i < histogram [c].size(); ++i)
-            max += histogram [c][i];
-
-    maxNumberPixels = max / (256 * histogram.size());
+    maxNumberPixels = max;
 }
 
 void HistogramView::paint (juce::Graphics& g)
@@ -97,7 +91,8 @@ void HistogramView::drawHistogramChart (juce::Graphics& g, std::vector<unsigned 
     for (int i=0; i < bins.size(); ++i)
     {
         const auto binHeight = juce::jlimit (0.0f, bounds.getHeight(), juce::jmap (float (bins [i]), 0.0f, float (max), 0.0f, bounds.getHeight()));
-        g.drawRect (bounds.getX() + i * binWidth, bounds.getY() + bounds.getHeight() - binHeight, binWidth, binHeight);
+        const juce::Rectangle<float> rect { bounds.getX() + i * binWidth, bounds.getY() + bounds.getHeight() - binHeight, binWidth, binHeight };
+        g.drawRect (rect.getSmallestIntegerContainer());
     }
 
 }

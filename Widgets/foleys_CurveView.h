@@ -31,15 +31,37 @@ class CurveView   : public juce::Component,
 public:
     CurveView();
 
+    /**
+     Setting a pixel format will set the channel names and the colours per channel accordingly.
+     You can override the default channel names and colours by calling @see setChannelNames()
+     and @see setChannelColours().
+     */
     void setPixelFormat (juce::Image::PixelFormat format);
+
+    /**
+     Set the channel names to display. They will be set by setPixelFormat, so if you want different
+     names, you should call it after or instead of setPixelFormat.
+     */
     void setChannelNames (const juce::StringArray& names);
+
+    /**
+     Set the channel colours to display. They will be set by setPixelFormat, so if you want different
+     colours, you should call it after or instead of setPixelFormat.
+     */
     void setChannelColours (const juce::Array<juce::Colour>& colours);
+
+    /**
+     Set the colour curves to use, e.g. when loading from a saved session.
+     */
+    void setColourCurves (std::vector<ColourCurve> colourCurves);
+
+    /**
+     Access the colour curves e.g. to apply to an Image @see applyLUTs()
+     */
+    const std::vector<ColourCurve>& getColourCurves() const;
 
     void paint (juce::Graphics& g) override;
     void resized() override;
-
-    void setColourCurves (std::vector<ColourCurve> colourCurves);
-    const std::vector<ColourCurve>& getColourCurves() const;
 
 private:
 

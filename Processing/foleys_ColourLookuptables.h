@@ -68,9 +68,9 @@ public:
             {
                 const auto slope = contrast <= 0.0 ? contrast + 1.0 : 1.0 / (1.0 - contrast);
                 for (size_t i = 0; i < 256; ++i)
-                    map [i] = juce::jlimit (0.0, 255.0,
-                                            ((std::pow (i / 255.0, gamma) - 0.5) * slope + 0.5
-                                             + brightness) * 255.0);
+                    map [i] = juce::uint8 (juce::jlimit (0, 255,
+                                                         juce::roundToInt (((std::pow (i / 255.0, gamma) - 0.5) * slope + 0.5
+                                                                            + brightness) * 255.0)));
             }
         }
     }

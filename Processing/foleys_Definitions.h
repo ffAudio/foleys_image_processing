@@ -27,6 +27,9 @@ namespace foleys
 namespace Definitions
 {
 
+    /**
+     Returns the names for a pixel format. Note that they are in spoken order and not in memory order.
+     */
     static inline juce::StringArray getChannelNames (juce::Image::PixelFormat format)
     {
         switch (format)
@@ -45,6 +48,9 @@ namespace Definitions
         }
     }
 
+    /**
+     Returns the colours for a pixel format. Note that they are in spoken order and not in memory order.
+     */
     static inline juce::Array<juce::Colour> getChannelColours (juce::Image::PixelFormat format)
     {
         switch (format)
