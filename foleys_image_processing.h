@@ -27,8 +27,8 @@
     ID:               foleys_image_processing
     vendor:           Foleys Finest Audio
     version:          1.0.0
-    name:             HTML rendering classes
-    description:      Classes to parse, display and interact with HTML documents
+    name:             Foleys Finest Image Processing
+    description:      A collection to do image processing and some widgets to inspect and modify image data
     website:          https://foleysfinest.com
     license:          BSD 3-clause
 
