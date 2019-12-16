@@ -20,7 +20,7 @@ Widgets:
 - Curve editor for LookupTables
 
 
-It's licensed permessively under BSD 3 clause, see LICENSE.md
+It's licensed permissively under BSD 3 clause, see `LICENSE.md`
 
 
 Let me know, what functionality you would hope to see.
